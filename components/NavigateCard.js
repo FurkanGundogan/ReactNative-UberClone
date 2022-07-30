@@ -1,6 +1,12 @@
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 import tw from "twrnc";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
@@ -8,9 +14,14 @@ import { useDispatch } from "react-redux";
 import { setDestination } from "../slices/navSlice";
 import { useNavigation } from "@react-navigation/native";
 import NavFavs from "./NavFavs";
+import { useHeaderHeight } from "@react-navigation/elements";
+import { Icon } from "@rneui/base";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 const NavigateCard = () => {
-    const dispatch=useDispatch()
-    const navigation=useNavigation()
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const headerHeight = useHeaderHeight();
   return (
     <SafeAreaView style={tw`bg-white flex-1 pt--6`}>
       <Text style={tw`text-center py-5 text-xl`}>Good Morning, Furu</Text>
@@ -25,7 +36,7 @@ const NavigateCard = () => {
                   description: data.description,
                 })
               );
-              navigation.navigate("RideOptionsCard")
+              navigation.navigate("RideOptionsCard");
             }}
             returnKeyType={"search"}
             fetchDetails={true}
@@ -40,7 +51,29 @@ const NavigateCard = () => {
             enablePoweredByContainer={false}
           />
         </View>
-        <NavFavs/>
+        <NavFavs />
+      </View>
+      <View
+        style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}
+      >
+        <TouchableOpacity
+        onPress={()=>navigation.navigate("RideOptionsCard")}
+          style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full`}
+        >
+          <Icon type="font-awesome" color={"white"} name="car" size={16}></Icon>
+          <Text style={tw`text-white text-center`}>Rides</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={tw`flex flex-row justify-between w-24 px-4 py-3 rounded-full`}
+        >
+          <Icon
+            type="ionicon"
+            color={"black"}
+            name="fast-food-outline"
+            size={16}
+          ></Icon>
+          <Text style={tw`text-center`}>Eats</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

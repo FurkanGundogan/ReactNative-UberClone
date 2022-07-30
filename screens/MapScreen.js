@@ -5,11 +5,11 @@ import Map from '../components/Map'
 import {createNativeStackNavigator} from "@react-navigation/native-stack"
 import NavigateCard from '../components/NavigateCard'
 import RideOptionsCard from '../components/RideOptionsCard'
+import { SafeAreaView } from 'react-native-safe-area-context'
 const MapScreen = () => {
   const Stack=createNativeStackNavigator()
   return (
-    <View>
-      <Text>MapScreen</Text>
+    <SafeAreaView>
       <View style={tw`h-1/2`}>
         <Map/>
       </View>
@@ -27,7 +27,7 @@ const MapScreen = () => {
      
      
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 
